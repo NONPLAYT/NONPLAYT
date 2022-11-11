@@ -1,8 +1,25 @@
 ## :wave: Hello there! Welcome to my profile
-![](https://komarev.com/ghpvc/?username=NONPLAYT)
 
 My name is NONPLAY, a developer from Russia, Moscow. I just love programming and that's all :D
-![Metrics](https://metrics.lecoq.io/NONPLAYT?template=classic&isocalendar=1&languages=1&activity=1&base=header%2C%20activity%2C%20community%2C%20repositories%2C%20metadata&base.indepth=false&base.hireable=false&base.skip=false&isocalendar=false&isocalendar.duration=half-year&languages=false&languages.limit=8&languages.threshold=0%25&languages.other=false&languages.colors=github&languages.sections=most-used&languages.indepth=false&languages.analysis.timeout=15&languages.categories=markup%2C%20programming&languages.recent.categories=markup%2C%20programming&languages.recent.load=300&languages.recent.days=14&activity=false&activity.limit=5&activity.load=300&activity.days=14&activity.visibility=all&activity.timestamps=false&activity.filter=all&config.timezone=Europe%2FMoscow)
+
+Here are some of the tools I use to get my work done:
+
+<kbd><img height="32" src="https://img.icons8.com/color/2x/intellij-idea.png"></kbd>
+<kbd><img height="32" src="https://img.icons8.com/color/2x/linux.png"></kbd>
+<kbd><img height="32" src="https://img.icons8.com/fluent/2x/console.png"></kbd>
+<kbd><img height="32" src="https://img.icons8.com/color/2x/open-source.png"></kbd>
+<kbd><img height="32" src="https://img.icons8.com/color/2x/git.png"></kbd>
+<kbd><img height="32" src="https://img.icons8.com/color/2x/nginx.png"></kbd>
+<a href="?#gh-light-mode-only"><kbd><img height="32" src="https://img.icons8.com/metro/2x/mysql.png"></kbd></a>
+<a href="?#gh-dark-mode-only"><kbd><img height="32" src="https://img.icons8.com/FFFFFF/metro/2x/mysql.png"></kbd></a>
+
+![Operating System](https://img.shields.io/badge/OS-Windows%2010%20Pro-informational?style=for-the-badge&logo=Windows&logoColor=white&color=007ec6)
+![Editor](https://img.shields.io/badge/Editor-IntelliJ%20Idea-informational?style=for-the-badge&logo=IntelliJ%20Idea&logoColor=white&color=007ec6)
+![Profile Views](https://komarev.com/ghpvc/?username=NONPLAYT&color=blue&style=for-the-badge)
+![Code Time](https://img.shields.io/endpoint?url=https://wakapi.dev/api/compat/shields/v1/nonplayt/interval:all_time&label=Code%20Time&style=for-the-badge&color=blue)
+
+<!--START_SECTION:waka-->
+<!--END_SECTION:waka-->
 
 ### ✉️ Contact Me
 
