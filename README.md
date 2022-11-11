@@ -19,6 +19,20 @@ Here are some of the tools I use to get my work done:
 ![Code Time](https://img.shields.io/endpoint?url=https://wakapi.dev/api/compat/shields/v1/nonplayt/interval:all_time&label=Code%20Time&style=for-the-badge&color=blue)
 
 <!--START_SECTION:waka-->
+**🐱 My GitHub Data** 
+
+> 🏆 217 Contributions in the Year 2022
+ > 
+> 📦 63.8 kB Used in GitHub's Storage 
+ > 
+> 🚫 Not Opted to Hire
+ > 
+> 📜 8 Public Repositories 
+ > 
+> 🔑 8 Private Repositories  
+ > 
+
+ Last Updated on 11/11/2022 17:51:05 UTC
 <!--END_SECTION:waka-->
 
 ### ✉️ Contact Me
