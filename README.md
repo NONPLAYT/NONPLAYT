@@ -4,7 +4,7 @@ My name is NONPLAY, a developer from Russia, Moscow. I just love programming and
 
 Here are some of the tools I use to get my work done:
 
-<kbd><img height="32" src="https://img.icons8.com/color/2x/intellij-idea.png"></kbd>
+<kbd><img height="32" src="https://img.icons8.com/color/2x/visual-studio-code-2019.png"></kbd>
 <kbd><img height="32" src="https://img.icons8.com/color/2x/linux.png"></kbd>
 <kbd><img height="32" src="https://img.icons8.com/fluent/2x/console.png"></kbd>
 <kbd><img height="32" src="https://img.icons8.com/color/2x/open-source.png"></kbd>
@@ -14,7 +14,7 @@ Here are some of the tools I use to get my work done:
 <a href="?#gh-dark-mode-only"><kbd><img height="32" src="https://img.icons8.com/FFFFFF/metro/2x/mysql.png"></kbd></a>
 
 ![Operating System](https://img.shields.io/badge/OS-Windows%2010%20Pro-informational?style=for-the-badge&logo=Windows&logoColor=white&color=007ec6)
-![Editor](https://img.shields.io/badge/Editor-IntelliJ%20Idea-informational?style=for-the-badge&logo=IntelliJ%20Idea&logoColor=white&color=007ec6)
+![Editor](https://img.shields.io/badge/Editor-VS%20Code-informational?style=for-the-badge&logo=Visual%20Studio%20Code&logoColor=white&color=007ec6)
 ![Profile Views](https://komarev.com/ghpvc/?username=NONPLAYT&color=blue&style=for-the-badge)
 
 <!--START_SECTION:waka-->
