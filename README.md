@@ -23,7 +23,7 @@ Here are some of the tools I use to get my work done:
 
 **🐱 My GitHub Data** 
 
-> 🏆 217 Contributions in the Year 2022
+> 🏆 218 Contributions in the Year 2022
  > 
 > 📦 63.8 kB Used in GitHub's Storage 
  > 
@@ -33,8 +33,47 @@ Here are some of the tools I use to get my work done:
  > 
 > 🔑 8 Private Repositories  
  > 
+**I'm a Night 🦉** 
 
- Last Updated on 11/11/2022 17:55:54 UTC
+```text
+🌞 Morning    53 commits     ██░░░░░░░░░░░░░░░░░░░░░░░   10.04% 
+🌆 Daytime    129 commits    ██████░░░░░░░░░░░░░░░░░░░   24.43% 
+🌃 Evening    212 commits    ██████████░░░░░░░░░░░░░░░   40.15% 
+🌙 Night      134 commits    ██████░░░░░░░░░░░░░░░░░░░   25.38%
+
+```
+📅 **I'm Most Productive on Sunday** 
+
+```text
+Monday       50 commits     ██░░░░░░░░░░░░░░░░░░░░░░░   9.47% 
+Tuesday      63 commits     ███░░░░░░░░░░░░░░░░░░░░░░   11.93% 
+Wednesday    75 commits     ███░░░░░░░░░░░░░░░░░░░░░░   14.2% 
+Thursday     70 commits     ███░░░░░░░░░░░░░░░░░░░░░░   13.26% 
+Friday       80 commits     ███░░░░░░░░░░░░░░░░░░░░░░   15.15% 
+Saturday     75 commits     ███░░░░░░░░░░░░░░░░░░░░░░   14.2% 
+Sunday       115 commits    █████░░░░░░░░░░░░░░░░░░░░   21.78%
+
+```
+
+
+📊 **This Week I Spent My Time On** 
+
+```text
+⌚︎ Time Zone: Europe/Moscow
+
+💬 Programming Languages: 
+No Activity Tracked This Week
+
+🔥 Editors: 
+No Activity Tracked This Week
+
+🐱‍💻 Projects: 
+No Activity Tracked This Week
+
+```
+
+
+ Last Updated on 12/11/2022 05:21:49 UTC
 <!--END_SECTION:waka-->
 
 ### ✉️ Contact Me
