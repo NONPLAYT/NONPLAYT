@@ -16,7 +16,6 @@ Here are some of the tools I use to get my work done:
 ![Operating System](https://img.shields.io/badge/OS-Windows%2010%20Pro-informational?style=for-the-badge&logo=Windows&logoColor=white&color=007ec6)
 ![Editor](https://img.shields.io/badge/Editor-IntelliJ%20Idea-informational?style=for-the-badge&logo=IntelliJ%20Idea&logoColor=white&color=007ec6)
 ![Profile Views](https://komarev.com/ghpvc/?username=NONPLAYT&color=blue&style=for-the-badge)
-![Code Time](https://img.shields.io/endpoint?url=https://wakapi.dev/api/compat/shields/v1/nonplayt/interval:all_time&label=Code%20Time&style=for-the-badge&color=blue)
 
 <!--START_SECTION:waka-->
 ![Code Time](http://img.shields.io/badge/Code%20Time-0%20secs-blue)
