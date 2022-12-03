@@ -18,7 +18,7 @@ Here are some of the tools I use to get my work done:
 ![Profile Views](https://komarev.com/ghpvc/?username=NONPLAYT&color=blue&style=for-the-badge)
 
 <!--START_SECTION:waka-->
-![Code Time](http://img.shields.io/badge/Code%20Time-11%20hrs%2034%20mins-blue)
+![Code Time](http://img.shields.io/badge/Code%20Time-11%20hrs%2049%20mins-blue)
 
 **🐱 My GitHub Data** 
 
@@ -78,7 +78,7 @@ BXSploit                 2 mins              █████░░░░░░�
 ```
 
 
- Last Updated on 02/12/2022 05:18:17 UTC
+ Last Updated on 03/12/2022 05:17:41 UTC
 <!--END_SECTION:waka-->
 
 ### ✉️ Contact Me
