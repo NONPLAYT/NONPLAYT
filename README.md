@@ -85,6 +85,6 @@ NDailyRewards            10 mins             ░░░░░░░░░░░�
 
 ### ✉️ Contact Me
 
-- [Discord](https://discord.com/users/597087584090587177) / NONPLAY#0001
+- [Discord](https://discord.com/users/597087584090587177) / NONPLAY#3782
 - [Discord Server](https://discord.gg/p7cxhw7E2M)
 - [BX Team](https://github.com/BX-Team) / Our organization
