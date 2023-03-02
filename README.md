@@ -18,7 +18,7 @@ Here are some of the tools I use to get my work done:
 ![Profile Views](https://komarev.com/ghpvc/?username=NONPLAYT&color=blue&style=for-the-badge)
 
 <!--START_SECTION:waka-->
-![Code Time](http://img.shields.io/badge/Code%20Time-77%20hrs%2013%20mins-blue)
+![Code Time](http://img.shields.io/badge/Code%20Time-77%20hrs%2043%20mins-blue)
 
 **🐱 My GitHub Data** 
 
@@ -77,7 +77,7 @@ NDailyRewards            4 mins              █░░░░░░░░░░�
 ```
 
 
- Last Updated on 01/03/2023 05:18:08 UTC
+ Last Updated on 02/03/2023 05:18:08 UTC
 <!--END_SECTION:waka-->
 
 ### ✉️ Contact Me
