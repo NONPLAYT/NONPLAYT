@@ -9,9 +9,6 @@ Here are some of the tools I use to get my work done:
 <kbd><img height="32" src="https://img.icons8.com/fluent/2x/console.png"></kbd>
 <kbd><img height="32" src="https://img.icons8.com/color/2x/open-source.png"></kbd>
 <kbd><img height="32" src="https://img.icons8.com/color/2x/git.png"></kbd>
-<kbd><img height="32" src="https://img.icons8.com/color/2x/nginx.png"></kbd>
-<a href="?#gh-light-mode-only"><kbd><img height="32" src="https://img.icons8.com/metro/2x/mysql.png"></kbd></a>
-<a href="?#gh-dark-mode-only"><kbd><img height="32" src="https://img.icons8.com/FFFFFF/metro/2x/mysql.png"></kbd></a>
 
 ![Operating System](https://img.shields.io/badge/OS-Windows%2010%20Pro-informational?style=for-the-badge&logo=Windows&logoColor=white&color=007ec6)
 ![Editor](https://img.shields.io/badge/Editor-VS%20Code-informational?style=for-the-badge&logo=Visual%20Studio%20Code&logoColor=white&color=007ec6)
