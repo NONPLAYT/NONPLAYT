@@ -15,7 +15,7 @@ Here are some of the tools I use to get my work done:
 ![Profile Views](https://komarev.com/ghpvc/?username=NONPLAYT&color=blue&style=for-the-badge)
 
 <!--START_SECTION:waka-->
-![Code Time](http://img.shields.io/badge/Code%20Time-131%20hrs-blue)
+![Code Time](http://img.shields.io/badge/Code%20Time-131%20hrs%2013%20mins-blue)
 
 **🐱 My GitHub Data** 
 
@@ -75,7 +75,7 @@ DivineMC-Server          0 secs              ░░░░░░░░░░░�
 ```
 
 
- Last Updated on 02/05/2023 18:39:26 UTC
+ Last Updated on 03/05/2023 18:39:48 UTC
 <!--END_SECTION:waka-->
 
 ### ✉️ Contact Me
