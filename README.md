@@ -1,18 +1,11 @@
+![Discord Presence](./header.png)
 ## :wave: Hello there! Welcome to my profile
 
 My name is NONPLAY, a developer from Russia, Moscow. I just love programming and that's all :D
 
-Here are some of the tools I use to get my work done:
+[![Discord Presence](https://lanyard.cnrad.dev/api/597087584090587177)](https://discord.com/users/597087584090587177) 
 
-<kbd><img height="32" src="https://img.icons8.com/color/2x/visual-studio-code-2019.png"></kbd>
-<kbd><img height="32" src="https://img.icons8.com/color/2x/linux.png"></kbd>
-<kbd><img height="32" src="https://img.icons8.com/fluent/2x/console.png"></kbd>
-<kbd><img height="32" src="https://img.icons8.com/color/2x/open-source.png"></kbd>
-<kbd><img height="32" src="https://img.icons8.com/color/2x/git.png"></kbd>
-
-![Operating System](https://img.shields.io/badge/OS-Windows%2010%20Pro-informational?style=for-the-badge&logo=Windows&logoColor=white&color=007ec6)
-![Editor](https://img.shields.io/badge/Editor-VS%20Code-informational?style=for-the-badge&logo=Visual%20Studio%20Code&logoColor=white&color=007ec6)
-![Profile Views](https://komarev.com/ghpvc/?username=NONPLAYT&color=blue&style=for-the-badge)
+# ⌚ Wakatime Stats
 
 <!--START_SECTION:waka-->
 ![Code Time](http://img.shields.io/badge/Code%20Time-142%20hrs%209%20mins-blue)
