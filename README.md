@@ -1,4 +1,9 @@
 ![Discord Presence](./header.png)
+<br></br>
+![Profile Views](https://komarev.com/ghpvc/?username=NONPLAYT&color=blue&style=for-the-badge)
+![Stats](https://img.shields.io/badge/0%25-OPTIMIZED-orange?style=for-the-badge)
+
+
 ## :wave: Hello there! Welcome to my profile
 
 My name is NONPLAY, a developer from Russia, Moscow. I just love programming and that's all :D
