@@ -8,7 +8,7 @@
 
 My name is NONPLAY, a developer from Russia, Moscow. I just love programming and that's all :D
 
-[![Discord Presence](https://lanyard.cnrad.dev/api/597087584090587177)](https://discord.com/users/597087584090587177) 
+[![Discord Presence](https://lanyard.cnrad.dev/api/597087584090587177?showDisplayName=true)](https://discord.com/users/597087584090587177) 
 
 # ⌚ Wakatime Stats
 
