@@ -76,6 +76,6 @@ Unknown Project          3 mins              █░░░░░░░░░░�
 
 ### ✉️ Contact Me
 
-- [Discord](https://discord.com/users/597087584090587177) / NONPLAY#3782
+- [Discord](https://discord.com/users/597087584090587177) / @nonplayt
 - [Discord Server](https://discord.gg/p7cxhw7E2M)
 - [BX Team](https://github.com/BX-Team) / Our organization
