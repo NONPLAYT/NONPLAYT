@@ -17,8 +17,6 @@ My name is NONPLAY, a developer from Russia, Moscow. I just love programming and
 
 > 📦 57.1 kB Used in GitHub's Storage 
  > 
-> 🏆 273 Contributions in the Year 2024
- > 
 > 🚫 Not Opted to Hire
  > 
 > 📜 4 Public Repositories 
@@ -70,7 +68,7 @@ NMS                      2 mins              ░░░░░░░░░░░�
 ```
 
 
- Last Updated on 15/10/2024 00:51:40 UTC
+ Last Updated on 16/10/2024 00:51:18 UTC
 <!--END_SECTION:waka-->
 
 ### ✉️ Contact Me
