@@ -76,5 +76,5 @@ paper-api                0 secs              ░░░░░░░░░░░�
 ### ✉️ Contact Me
 
 - [Discord](https://discord.com/users/597087584090587177) / @nonplayt
-- [Discord Server](https://discord.gg/p7cxhw7E2M)
+- [Discord Server](https://discord.gg/qNyybSSPm5)
 - [BX Team](https://github.com/BX-Team) / Our organization
