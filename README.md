@@ -11,5 +11,7 @@
 
   ![](https://raw.githubusercontent.com/NONPLAYT/NONPLAYT/output/generated/overview.svg)
   ![](https://raw.githubusercontent.com/NONPLAYT/NONPLAYT/output/generated/languages.svg)
+
+  [![Discord Presence](https://lanyard.cnrad.dev/api/597087584090587177?showDisplayName=true)](https://discord.com/users/597087584090587177) 
   
 </div>
