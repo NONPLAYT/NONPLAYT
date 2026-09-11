@@ -33,9 +33,11 @@ jobs:
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          EXCLUDED: ${{ secrets.EXCLUDED }}
-          EXCLUDED_LANGS: ${{ secrets.EXCLUDED_LANGS }}
-          COUNT_STATS_FROM_FORKS: ${{ secrets.COUNT_STATS_FROM_FORKS }}
+          ORGS: ${{ vars.ORGS }}
+          EXCLUDED: ${{ vars.EXCLUDED }}
+          EXCLUDED_LANGS: ${{ vars.EXCLUDED_LANGS }}
+          COUNT_STATS_FROM_CONTRIBUTED: ${{ vars.COUNT_STATS_FROM_CONTRIBUTED }}
+          COUNT_PRIVATE_CONTRIBUTIONS: ${{ vars.COUNT_PRIVATE_CONTRIBUTIONS }}
 
       - name: Commit to the output branch of repo
         run: |

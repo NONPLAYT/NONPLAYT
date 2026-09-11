@@ -3,9 +3,37 @@
 import asyncio
 import os
 import re
+from typing import List, Optional, Set
 
 import aiohttp
 from github_stats import Stats
+
+TRUTHY = {"1", "true", "yes", "y", "on"}
+
+
+def env_flag(name: str) -> bool:
+    """
+    :param name: name of the environment variable to read
+    :return: whether the variable is set to a truthy value
+    """
+    return (os.getenv(name) or "").strip().lower() in TRUTHY
+
+
+def env_list(name: str) -> List[str]:
+    """
+    :param name: name of the environment variable to read
+    :return: comma-separated values of the variable, blanks dropped
+    """
+    return [x.strip() for x in (os.getenv(name) or "").split(",") if x.strip()]
+
+
+def env_set(name: str) -> Optional[Set[str]]:
+    """
+    :param name: name of the environment variable to read
+    :return: comma-separated values of the variable as a set, or None if unset
+    """
+    values = env_list(name)
+    return set(values) if values else None
 
 
 def generate_output_folder() -> None:
@@ -94,15 +122,11 @@ async def main() -> None:
         # access_token = os.getenv("GITHUB_TOKEN")
         raise Exception("A personal access token is required to proceed!")
     user = os.getenv("GITHUB_ACTOR")
-    exclude_repos = os.getenv("EXCLUDED")
-    exclude_repos = (
-        {x.strip() for x in exclude_repos.split(",")} if exclude_repos else None
-    )
-    exclude_langs = os.getenv("EXCLUDED_LANGS")
-    exclude_langs = (
-        {x.strip() for x in exclude_langs.split(",")} if exclude_langs else None
-    )
-    consider_forked_repos = len(os.getenv("COUNT_STATS_FROM_FORKS")) != 0
+    exclude_repos = env_set("EXCLUDED")
+    exclude_langs = env_set("EXCLUDED_LANGS")
+    orgs = env_list("ORGS")
+    consider_contributed_repos = env_flag("COUNT_STATS_FROM_CONTRIBUTED")
+    count_private_contributions = env_flag("COUNT_PRIVATE_CONTRIBUTIONS")
     async with aiohttp.ClientSession() as session:
         s = Stats(
             user,
@@ -110,7 +134,9 @@ async def main() -> None:
             session,
             exclude_repos=exclude_repos,
             exclude_langs=exclude_langs,
-            consider_forked_repos=consider_forked_repos,
+            consider_contributed_repos=consider_contributed_repos,
+            orgs=orgs,
+            count_private_contributions=count_private_contributions,
         )
         await asyncio.gather(generate_languages(s), generate_overview(s))
 

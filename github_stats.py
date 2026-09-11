@@ -8,6 +8,32 @@ import aiohttp
 import requests
 
 ###############################################################################
+# Constants
+###############################################################################
+
+
+# Fields requested for every repository node, regardless of which connection it
+# came from. isPrivate/isArchived are fetched so they can be filtered locally as
+# well, since not every connection accepts them as arguments.
+REPO_NODE_FIELDS = """nameWithOwner
+        isPrivate
+        isArchived
+        stargazers {
+          totalCount
+        }
+        forkCount
+        languages(first: 10, orderBy: {field: SIZE, direction: DESC}) {
+          edges {
+            size
+            node {
+              name
+              color
+            }
+          }
+        }"""
+
+
+###############################################################################
 # Main Classes
 ###############################################################################
 
@@ -128,6 +154,7 @@ class Queries(object):
             direction: DESC
         }},
         isFork: false,
+        privacy: PUBLIC,
         after: {"null" if owned_cursor is None else '"' + owned_cursor + '"'}
     ) {{
       pageInfo {{
@@ -135,25 +162,13 @@ class Queries(object):
         endCursor
       }}
       nodes {{
-        nameWithOwner
-        stargazers {{
-          totalCount
-        }}
-        forkCount
-        languages(first: 10, orderBy: {{field: SIZE, direction: DESC}}) {{
-          edges {{
-            size
-            node {{
-              name
-              color
-            }}
-          }}
-        }}
+        {REPO_NODE_FIELDS}
       }}
     }}
     repositoriesContributedTo(
         first: 100,
         includeUserRepositories: false,
+        privacy: PUBLIC,
         orderBy: {{
             field: UPDATED_AT,
             direction: DESC
@@ -171,20 +186,38 @@ class Queries(object):
         endCursor
       }}
       nodes {{
-        nameWithOwner
-        stargazers {{
-          totalCount
-        }}
-        forkCount
-        languages(first: 10, orderBy: {{field: SIZE, direction: DESC}}) {{
-          edges {{
-            size
-            node {{
-              name
-              color
-            }}
-          }}
-        }}
+        {REPO_NODE_FIELDS}
+      }}
+    }}
+  }}
+}}
+"""
+
+    @staticmethod
+    def org_repos_overview(org: str, cursor: Optional[str] = None) -> str:
+        """
+        :param org: login of the organization to query
+        :param cursor: pagination cursor for the organization's repositories
+        :return: GraphQL query with overview of an organization's public repos
+        """
+        return f"""{{
+  organization(login: "{org}") {{
+    repositories(
+        first: 100,
+        orderBy: {{
+            field: UPDATED_AT,
+            direction: DESC
+        }},
+        isFork: false,
+        privacy: PUBLIC,
+        after: {"null" if cursor is None else '"' + cursor + '"'}
+    ) {{
+      pageInfo {{
+        hasNextPage
+        endCursor
+      }}
+      nodes {{
+        {REPO_NODE_FIELDS}
       }}
     }}
   }}
@@ -217,6 +250,7 @@ query {
         from: "{year}-01-01T00:00:00Z",
         to: "{int(year) + 1}-01-01T00:00:00Z"
     ) {{
+      restrictedContributionsCount
       contributionCalendar {{
         totalContributions
       }}
@@ -251,12 +285,16 @@ class Stats(object):
         session: aiohttp.ClientSession,
         exclude_repos: Optional[Set] = None,
         exclude_langs: Optional[Set] = None,
-        consider_forked_repos: bool = False,
+        consider_contributed_repos: bool = False,
+        orgs: Optional[List[str]] = None,
+        count_private_contributions: bool = False,
     ):
         self.username = username
         self._exclude_repos = set() if exclude_repos is None else exclude_repos
         self._exclude_langs = set() if exclude_langs is None else exclude_langs
-        self._consider_forked_repos = consider_forked_repos
+        self._consider_contributed_repos = consider_contributed_repos
+        self._orgs = list(orgs) if orgs else []
+        self._count_private_contributions = count_private_contributions
         self.queries = Queries(username, access_token, session)
 
         self._name = None
@@ -267,6 +305,8 @@ class Stats(object):
         self._repos = None
         self._lines_changed = None
         self._views = None
+        self._stats_collected = False
+        self._stats_lock = asyncio.Lock()
 
     async def to_str(self) -> str:
         """
@@ -289,9 +329,75 @@ Project page views: {await self.views:,}
 Languages:
   - {formatted_languages}"""
 
+    def _add_repo(self, repo: Dict) -> None:
+        """
+        Fold a single repository into the running totals. Private, archived,
+        excluded and already-counted repositories are skipped.
+        :param repo: repository node as returned by the GraphQL API
+        """
+        name = repo.get("nameWithOwner")
+        if name is None or name in self._repos or name in self._exclude_repos:
+            return
+        if repo.get("isPrivate", False) or repo.get("isArchived", False):
+            return
+
+        self._repos.add(name)
+        self._stargazers += repo.get("stargazers", {}).get("totalCount", 0)
+        self._forks += repo.get("forkCount", 0)
+
+        for lang in repo.get("languages", {}).get("edges", []):
+            lang_name = lang.get("node", {}).get("name", "Other")
+            if lang_name in self._exclude_langs:
+                continue
+            if lang_name in self._languages:
+                self._languages[lang_name]["size"] += lang.get("size", 0)
+                self._languages[lang_name]["occurrences"] += 1
+            else:
+                self._languages[lang_name] = {
+                    "size": lang.get("size", 0),
+                    "occurrences": 1,
+                    "color": lang.get("node", {}).get("color"),
+                }
+
+    async def _get_org_stats(self, org: str) -> None:
+        """
+        Add every public, non-forked repository of an organization to the
+        running totals
+        :param org: login of the organization to query
+        """
+        cursor = None
+        while True:
+            raw_results = await self.queries.query(
+                Queries.org_repos_overview(org, cursor=cursor)
+            )
+            organization = ((raw_results or {}).get("data") or {}).get("organization")
+            if organization is None:
+                print(f"No data returned for organization {org}. Skipping it.")
+                return
+
+            org_repos = organization.get("repositories") or {}
+            for repo in org_repos.get("nodes") or []:
+                self._add_repo(repo)
+
+            page_info = org_repos.get("pageInfo") or {}
+            cursor = page_info.get("endCursor")
+            if not page_info.get("hasNextPage", False) or cursor is None:
+                return
+
     async def get_stats(self) -> None:
         """
-        Get lots of summary statistics using one big query. Sets many attributes
+        Get lots of summary statistics using one big query. Sets many attributes.
+        Concurrent callers wait for the first one instead of collecting twice
+        """
+        async with self._stats_lock:
+            if self._stats_collected:
+                return
+            await self._collect_stats()
+            self._stats_collected = True
+
+    async def _collect_stats(self) -> None:
+        """
+        Walk every repository the stats are built from and total them up
         """
         self._stargazers = 0
         self._forks = 0
@@ -301,81 +407,55 @@ Languages:
 
         next_owned = None
         next_contrib = None
-        while True:
+        owned_done = False
+        contrib_done = False
+        while not (owned_done and contrib_done):
             raw_results = await self.queries.query(
                 Queries.repos_overview(
                     owned_cursor=next_owned, contrib_cursor=next_contrib
                 )
             )
-            raw_results = raw_results if raw_results is not None else {}
+            viewer = ((raw_results or {}).get("data") or {}).get("viewer") or {}
 
-            self._name = raw_results.get("data", {}).get("viewer", {}).get("name", None)
             if self._name is None:
-                self._name = (
-                    raw_results.get("data", {})
-                    .get("viewer", {})
-                    .get("login", "No Name")
-                )
+                self._name = viewer.get("name") or viewer.get("login") or "No Name"
 
-            contrib_repos = (
-                raw_results.get("data", {})
-                .get("viewer", {})
-                .get("repositoriesContributedTo", {})
-            )
-            owned_repos = (
-                raw_results.get("data", {}).get("viewer", {}).get("repositories", {})
-            )
+            owned_repos = viewer.get("repositories") or {}
+            contrib_repos = viewer.get("repositoriesContributedTo") or {}
 
-            repos = owned_repos.get("nodes", [])
-            if self._consider_forked_repos:
-                repos += contrib_repos.get("nodes", [])
-            else:
-                for repo in contrib_repos.get("nodes", []):
+            if not owned_done:
+                for repo in owned_repos.get("nodes") or []:
+                    self._add_repo(repo)
+
+            if not contrib_done:
+                for repo in contrib_repos.get("nodes") or []:
+                    if self._consider_contributed_repos:
+                        self._add_repo(repo)
+                        continue
                     name = repo.get("nameWithOwner")
-                    if name in self._ignored_repos or name in self._exclude_repos:
+                    if name is None or name in self._exclude_repos:
+                        continue
+                    if repo.get("isPrivate", False) or repo.get("isArchived", False):
                         continue
                     self._ignored_repos.add(name)
 
-            for repo in repos:
-                name = repo.get("nameWithOwner")
-                if name in self._repos or name in self._exclude_repos:
-                    continue
-                self._repos.add(name)
-                self._stargazers += repo.get("stargazers").get("totalCount", 0)
-                self._forks += repo.get("forkCount", 0)
+            owned_page = owned_repos.get("pageInfo") or {}
+            contrib_page = contrib_repos.get("pageInfo") or {}
+            owned_done = owned_done or not owned_page.get("hasNextPage", False)
+            contrib_done = contrib_done or not contrib_page.get("hasNextPage", False)
+            next_owned = owned_page.get("endCursor") or next_owned
+            next_contrib = contrib_page.get("endCursor") or next_contrib
 
-                for lang in repo.get("languages", {}).get("edges", []):
-                    name = lang.get("node", {}).get("name", "Other")
-                    languages = await self.languages
-                    if name in self._exclude_langs:
-                        continue
-                    if name in languages:
-                        languages[name]["size"] += lang.get("size", 0)
-                        languages[name]["occurrences"] += 1
-                    else:
-                        languages[name] = {
-                            "size": lang.get("size", 0),
-                            "occurrences": 1,
-                            "color": lang.get("node", {}).get("color"),
-                        }
+        for org in self._orgs:
+            await self._get_org_stats(org)
 
-            if owned_repos.get("pageInfo", {}).get(
-                "hasNextPage", False
-            ) or contrib_repos.get("pageInfo", {}).get("hasNextPage", False):
-                next_owned = owned_repos.get("pageInfo", {}).get(
-                    "endCursor", next_owned
-                )
-                next_contrib = contrib_repos.get("pageInfo", {}).get(
-                    "endCursor", next_contrib
-                )
-            else:
-                break
+        self._ignored_repos -= self._repos
 
         # TODO: Improve languages to scale by number of contributions to
         #       specific filetypes
         langs_total = sum([v.get("size", 0) for v in self._languages.values()])
         for k, v in self._languages.items():
-            v["prop"] = 100 * (v.get("size", 0) / langs_total)
+            v["prop"] = 100 * (v.get("size", 0) / langs_total) if langs_total else 0
 
     @property
     async def name(self) -> str:
@@ -479,9 +559,10 @@ Languages:
             .values()
         )
         for year in by_year:
-            self._total_contributions += year.get("contributionCalendar", {}).get(
-                "totalContributions", 0
-            )
+            total = year.get("contributionCalendar", {}).get("totalContributions", 0)
+            if not self._count_private_contributions:
+                total -= year.get("restrictedContributionsCount", 0)
+            self._total_contributions += max(total, 0)
         return self._total_contributions
 
     @property
@@ -542,8 +623,10 @@ async def main() -> None:
     """
     access_token = os.getenv("ACCESS_TOKEN")
     user = os.getenv("GITHUB_ACTOR")
+    orgs = os.getenv("ORGS")
+    orgs = [x.strip() for x in orgs.split(",") if x.strip()] if orgs else None
     async with aiohttp.ClientSession() as session:
-        s = Stats(user, access_token, session)
+        s = Stats(user, access_token, session, orgs=orgs)
         print(await s.to_str())
 
 
